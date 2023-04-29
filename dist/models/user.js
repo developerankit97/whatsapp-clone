@@ -29,6 +29,10 @@ var User = _db["default"].define('user', {
   password: {
     type: _sequelize["default"].STRING,
     allowNull: false
+  },
+  isLoggedIn: {
+    type: _sequelize["default"].BOOLEAN,
+    defaultValue: false
   }
 });
 var _default = User;

@@ -17,7 +17,7 @@ async function loginUser(e) {
 		if (response.status == 200) {
 			alert('login successful');
 			localStorage.setItem('token', response.data.token);
-			//document.location.replace("/dashboard");
+			document.location.replace('/html/main.html');
 		} else {
 			alert(response.statusText);
 		}

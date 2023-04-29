@@ -9,5 +9,6 @@ var _authController = require("../controllers/authController");
 var router = (0, _express.Router)();
 router.post('/signup', _authController.postCreateUser);
 router.post('/login', _authController.postLoginUser);
+router.post('/logout', _authController.postLoginUser);
 var _default = router;
 exports["default"] = _default;
