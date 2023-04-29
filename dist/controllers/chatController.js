@@ -22,7 +22,7 @@ var getMessages = /*#__PURE__*/function () {
           return _chat["default"].findAll();
         case 3:
           messages = _context.sent;
-          (0, _helpers.sendResponse)(res, 200, messages);
+          (0, _helpers.sendResponse)(res, 200, 'OK', messages);
           _context.next = 11;
           break;
         case 7:

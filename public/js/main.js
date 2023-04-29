@@ -1,7 +1,7 @@
 const logoutBtn = document.querySelector('.logout-btn');
-const inputMessage = document.querySelector('#input-message');
+const inputMessage = document.querySelector('#msg');
 const inputMessageBtn = document.querySelector('.input-message-btn');
-let allMessages = document.querySelector('.all-messages');
+let chatMessages = document.querySelector('.chat-messages');
 
 const apiPrefix = 'http://localhost:3000';
 
@@ -28,15 +28,12 @@ async function sendMessage() {
 						},
 					}
 				);
-				let output = `<li
-                                class="list-group-item w-100 border-0 py-1 d-flex flex-wrap justify-content-end bg-transparent">
-                                <div class="w-100">
-                                    <p class="mb-1 w-100 p-1 px-2 rounded-4" style="background-color: #dbe5ec;">
+				let output = `<div class="message">
+                                    <p class="text">
                                         ${response.data.response.message}
                                     </p>
-                                </div>
-                            </li>`;
-				allMessages.innerHTML += output;
+                                </div>`;
+				chatMessages.innerHTML += output;
 				console.log(response);
 			} catch (e) {
 				console.log(e.response.statusText, e.response);
@@ -57,7 +54,15 @@ async function getMessages() {
 					'Content-Type': 'application/json',
 				},
 			});
-			console.log('working...');
+			response.data.response.forEach((message) => {
+				let output = `<div class="message">
+                                    <p class="text">
+                                        ${message.message}
+                                    </p>
+                                </div>`;
+				chatMessages.innerHTML += output;
+			});
+			console.log(response.data);
 		} catch (e) {
 			if (e.response.status == 404) {
 				alert('You have been logged out. please log in first');
