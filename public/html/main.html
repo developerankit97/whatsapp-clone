@@ -17,6 +17,7 @@
     <div class="chat-container">
         <header class="chat-header">
             <h1><i class="fas fa-smile"></i> Chat App</h1>
+            <h4 id="user-status">User Name is Online</h4>
             <button class="btn logout-btn">Logout</button>
         </header>
         <main class="chat-main">
@@ -25,14 +26,9 @@
                 <h2 id="room-name">JavaScript</h2>
                 <h3><i class="fas fa-users"></i> Users</h3>
                 <ul id="users">
-                    <li>Brad</li>
-                    <li>John</li>
-                    <li>Mary</li>
-                    <li>Paul</li>
-                    <li>Mike</li>
                 </ul>
             </div>
-            <div class="chat-messages">
+            <div class="chat-messages" data-user="" data-group="">
                 <!-- <div class="message">
                     <p class="meta">Brad <span>9:12pm</span></p>
                     <p class="text">
@@ -50,9 +46,9 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script src="../js/main.js"></script>
 </body>
 

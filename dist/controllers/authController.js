@@ -91,43 +91,45 @@ var postLoginUser = /*#__PURE__*/function () {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _req$body2 = req.body, email = _req$body2.email, password = _req$body2.password;
+          console.log(req.body);
           if (!(!email || !password)) {
-            _context2.next = 3;
+            _context2.next = 4;
             break;
           }
           return _context2.abrupt("return", res.status(400).json({
             message: 'Please provide all fields'
           }));
-        case 3:
-          _context2.prev = 3;
-          _context2.next = 6;
+        case 4:
+          _context2.prev = 4;
+          _context2.next = 7;
           return _user["default"].findOne({
             where: {
               email: email
             }
           });
-        case 6:
+        case 7:
           user = _context2.sent;
+          console.log(user);
           if (user) {
-            _context2.next = 9;
+            _context2.next = 11;
             break;
           }
           return _context2.abrupt("return", res.status(404).json({
             message: 'User not found'
           }));
-        case 9:
-          _context2.next = 11;
-          return _bcrypt["default"].compare(password, user.password);
         case 11:
+          _context2.next = 13;
+          return _bcrypt["default"].compare(password, user.password);
+        case 13:
           isMatch = _context2.sent;
           if (isMatch) {
-            _context2.next = 14;
+            _context2.next = 16;
             break;
           }
           return _context2.abrupt("return", res.status(401).json({
             message: 'Invalid credentials'
           }));
-        case 14:
+        case 16:
           user.isLoggedIn = true;
           user.save();
           token = _jsonwebtoken["default"].sign({
@@ -138,17 +140,17 @@ var postLoginUser = /*#__PURE__*/function () {
             message: 'User logged in successful',
             token: token
           }));
-        case 20:
-          _context2.prev = 20;
-          _context2.t0 = _context2["catch"](3);
+        case 22:
+          _context2.prev = 22;
+          _context2.t0 = _context2["catch"](4);
           return _context2.abrupt("return", res.status(500).json({
             message: 'User login failed'
           }));
-        case 23:
+        case 25:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[3, 20]]);
+    }, _callee2, null, [[4, 22]]);
   }));
   return function postLoginUser(_x4, _x5, _x6) {
     return _ref2.apply(this, arguments);

@@ -4,9 +4,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.postSendMessage = exports.getMessages = void 0;
+exports.getUsers = exports.getUser = void 0;
 var _helpers = require("../utils/helpers");
-var _chat = _interopRequireDefault(require("../models/chat"));
 var _user = _interopRequireDefault(require("../models/user"));
 var _sequelize = require("sequelize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -16,81 +15,71 @@ function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _ty
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-var getMessages = /*#__PURE__*/function () {
+var getUsers = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res, next) {
-    var receiverId, messages;
+    var users;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          receiverId = req.params.receiverId;
-          _context.prev = 1;
-          _context.next = 4;
-          return _chat["default"].findAll({
-            where: _defineProperty({}, _sequelize.Op.and, [{
-              senderId: req.user.id
-            }, {
-              receiverId: receiverId
-            }])
+          _context.prev = 0;
+          _context.next = 3;
+          return _user["default"].findAll({
+            where: {
+              id: _defineProperty({}, _sequelize.Op.ne, req.user.id)
+            }
           });
-        case 4:
-          messages = _context.sent;
-          (0, _helpers.sendResponse)(res, 200, 'OK', messages);
-          _context.next = 12;
+        case 3:
+          users = _context.sent;
+          (0, _helpers.sendResponse)(res, 200, 'OK', users);
+          _context.next = 11;
           break;
-        case 8:
-          _context.prev = 8;
-          _context.t0 = _context["catch"](1);
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](0);
           console.log(_context.t0);
           (0, _helpers.sendError)(res, 500, _context.t0);
-        case 12:
+        case 11:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
-  return function getMessages(_x, _x2, _x3) {
+  return function getUsers(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
-exports.getMessages = getMessages;
-var postSendMessage = /*#__PURE__*/function () {
+exports.getUsers = getUsers;
+var getUser = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res, next) {
-    var msg, receiverId, msgResponse;
+    var user;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          msg = req.body.msg;
-          receiverId = Number(req.body.receiverId);
-          _context2.prev = 2;
-          _context2.next = 5;
-          return _chat["default"].create({
-            message: msg,
-            senderId: req.user.id,
-            receiverId: receiverId
+          _context2.prev = 0;
+          _context2.next = 3;
+          return _user["default"].findOne({
+            where: {
+              id: req.params.userId
+            }
           });
-        case 5:
-          msgResponse = _context2.sent;
-          if (msgResponse) {
-            (0, _helpers.sendResponse)(res, 200, 'OK', {
-              msgResponse: msgResponse,
-              username: req.user.fullName
-            });
-          }
-          _context2.next = 13;
+        case 3:
+          user = _context2.sent;
+          (0, _helpers.sendResponse)(res, 200, 'OK', user);
+          _context2.next = 11;
           break;
-        case 9:
-          _context2.prev = 9;
-          _context2.t0 = _context2["catch"](2);
+        case 7:
+          _context2.prev = 7;
+          _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
           (0, _helpers.sendError)(res, 500, _context2.t0);
-        case 13:
+        case 11:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[2, 9]]);
+    }, _callee2, null, [[0, 7]]);
   }));
-  return function postSendMessage(_x4, _x5, _x6) {
+  return function getUser(_x4, _x5, _x6) {
     return _ref2.apply(this, arguments);
   };
 }();
-exports.postSendMessage = postSendMessage;
+exports.getUser = getUser;

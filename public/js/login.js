@@ -10,7 +10,7 @@ async function loginUser(e) {
 	const password = loginPassword.value;
 	try {
 		const response = await axios.post(
-			'http://localhost:3000/users/login',
+			'http://localhost:3000/auth/login',
 			JSON.stringify({ email, password }),
 			{ headers: { 'Content-Type': 'application/json' } }
 		);

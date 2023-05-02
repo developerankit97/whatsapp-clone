@@ -7,17 +7,14 @@ exports["default"] = void 0;
 var _sequelize = require("sequelize");
 var _db = _interopRequireDefault(require("../utils/db"));
 var _user = _interopRequireDefault(require("./user"));
-var _group = _interopRequireDefault(require("./group"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-var Chat = _db["default"].define('chat', {
+// import Group from './group';
+
+var Room = _db["default"].define('room', {
   id: {
     type: _sequelize.Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    allowNull: false
-  },
-  message: {
-    type: _sequelize.Sequelize.STRING,
     allowNull: false
   },
   senderId: {
@@ -35,15 +32,7 @@ var Chat = _db["default"].define('chat', {
       model: _user["default"],
       key: 'id'
     }
-  },
-  groupId: {
-    type: _sequelize.Sequelize.INTEGER,
-    allowNull: true,
-    references: {
-      model: _group["default"],
-      key: 'id'
-    }
   }
 });
-var _default = Chat;
+var _default = Room;
 exports["default"] = _default;
